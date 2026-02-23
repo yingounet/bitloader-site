@@ -3,5 +3,8 @@
   "outputDirectory": "dist",
   "devCommand": "pnpm run dev",
   "installCommand": "pnpm install",
-  "framework": "astro"
+  "framework": "astro",
+  "functions": {
+    "nodeVersion": "20.x"
+  }
 }
