@@ -3,5 +3,8 @@
   "outputDirectory": "dist",
   "devCommand": "npm run dev",
   "installCommand": "npm install",
-  "framework": "astro"
+  "framework": "astro",
+  "env": {
+    "NODE_VERSION": "22"
+  }
 }
