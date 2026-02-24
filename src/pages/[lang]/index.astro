@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HomeContent from '../../components/HomeContent.astro';
+import { getTranslation, supportedLocales } from '../../i18n/utils';
+import { ui } from '../../i18n/index';
+
+export function getStaticPaths() {
+  return supportedLocales.map((locale) => ({
+    params: { lang: locale },
+    props: { locale },
+  }));
+}
+
+const { locale } = Astro.props;
+const t = (key: keyof typeof ui.en) => getTranslation(locale, key);
+
+const titles = {
+  en: 'BitLoader - USB Boot Drive Creator for macOS',
+  zh: 'BitLoader - macOS USB 启动盘制作工具',
+  ja: 'BitLoader - macOS 用 USB ブートドライブ作成ツール',
+  ko: 'BitLoader - macOS 용 USB 부팅 드라이브 제작 도구',
+  de: 'BitLoader - USB-Boot-Laufwerk-Ersteller für macOS',
+};
+
+const descriptions = {
+  en: 'The easiest way to create bootable USB drives on macOS. Support for ISO, IMG, DMG and compressed formats.',
+  zh: '在 macOS 上制作可启动 USB 驱动器的最简单方法。支持 ISO、IMG、DMG 和压缩格式。',
+  ja: 'macOS でブータブル USB ドライブを作成する最も簡単な方法。ISO、IMG、DMG、圧縮形式をサポート。',
+  ko: 'macOS 에서 부팅 가능 USB 드라이브를 만드는 가장 쉬운 방법. ISO, IMG, DMG 및 압축 형식을 지원합니다.',
+  de: 'Der einfachste Weg, bootfähige USB-Laufwerke unter macOS zu erstellen. Unterstützung für ISO, IMG, DMG und komprimierte Formate.',
+};
+---
+
+<BaseLayout 
+  title={titles[locale]} 
+  description={descriptions[locale]} 
+  locale={locale}
+>
+  <HomeContent locale={locale} t={t} />
+</BaseLayout>

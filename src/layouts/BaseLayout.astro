@@ -1,16 +1,26 @@
 ---
 import '../styles/global.css';
+import { getTranslation, getPathWithLocale, supportedLocales } from '../i18n/utils';
+import { languages } from '../i18n/index';
 
 export interface Props {
   title?: string;
   description?: string;
+  locale?: 'en' | 'zh' | 'ja' | 'ko' | 'de';
 }
 
-const { title = 'BitLoader', description = 'The easiest way to create bootable USB drives on macOS' } = Astro.props;
+const { 
+  title = 'BitLoader', 
+  description = 'The easiest way to create bootable USB drives on macOS',
+  locale = 'en'
+} = Astro.props;
+
+const t = (key: keyof typeof import('../i18n/index').ui.en) => getTranslation(locale, key);
+const currentPath = Astro.url.pathname;
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang={locale}>
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -22,15 +32,25 @@ const { title = 'BitLoader', description = 'The easiest way to create bootable U
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content={locale} />
     <meta name="twitter:card" content="summary_large_image" />
     <title>{title}</title>
-    
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    {supportedLocales.filter(l => l !== locale).map((l) => (
+      <link 
+        rel="alternate" 
+        hreflang={l} 
+        href={`https://bitloader.io${getPathWithLocale(currentPath, l)}`} 
+      />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={`https://bitloader.io${getPathWithLocale(currentPath, 'en')}`} />
   </head>
-  <body class="gradient-bg">
+  <body class="gradient-bg" data-locale={locale}>
     <slot />
   </body>
 </html>
