@@ -6,7 +6,7 @@ import { languages } from '../i18n/index';
 export interface Props {
   title?: string;
   description?: string;
-  locale?: 'en' | 'zh' | 'ja' | 'ko' | 'de';
+  locale?: 'en' | 'zh-Hans' | 'zh-Hant' | 'ja' | 'fr' | 'de' | 'es' | 'ko' | 'pt-BR' | 'ru' | 'it' | 'pl' | 'nl';
 }
 
 const { 
@@ -39,7 +39,7 @@ const currentPath = Astro.url.pathname;
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     {supportedLocales.filter(l => l !== locale).map((l) => (
       <link 

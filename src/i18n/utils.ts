@@ -9,7 +9,8 @@ export function getLocaleFromPath(pathname: string): Locale {
   if (parts.length === 0) return 'en';
   
   const firstPart = parts[0];
-  if (['en', 'zh', 'ja', 'ko', 'de'].includes(firstPart)) {
+  const validLocales = ['en', 'zh-Hans', 'zh-Hant', 'ja', 'fr', 'de', 'es', 'ko', 'pt-BR', 'ru', 'it', 'pl', 'nl'];
+  if (validLocales.includes(firstPart)) {
     return firstPart as Locale;
   }
   return 'en';
@@ -20,7 +21,8 @@ export function getPathWithoutLocale(pathname: string): string {
   if (parts.length === 0) return '/';
   
   const firstPart = parts[0];
-  if (['en', 'zh', 'ja', 'ko', 'de'].includes(firstPart)) {
+  const validLocales = ['en', 'zh-Hans', 'zh-Hant', 'ja', 'fr', 'de', 'es', 'ko', 'pt-BR', 'ru', 'it', 'pl', 'nl'];
+  if (validLocales.includes(firstPart)) {
     return '/' + parts.slice(1).join('/');
   }
   return '/' + parts.join('/');
@@ -34,4 +36,4 @@ export function getPathWithLocale(pathname: string, locale: Locale): string {
   return `/${locale}${pathWithoutLocale}`;
 }
 
-export const supportedLocales = ['en', 'zh', 'ja', 'ko', 'de'] as const;
+export const supportedLocales = ['en', 'zh-Hans', 'zh-Hant', 'ja', 'fr', 'de', 'es', 'ko', 'pt-BR', 'ru', 'it', 'pl', 'nl'] as const;
